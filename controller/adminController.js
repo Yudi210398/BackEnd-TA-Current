@@ -12,6 +12,7 @@ import { allproductFungsi } from "./contollerProduct.js";
 
 export const loginAdmin = async (req, res, next) => {
   try {
+    console.log(`kocak`);
     const { email, password } = req.body;
     const expiresAt = new Date(Date.now() + 604800000);
     const error = validationResult(req);
@@ -29,7 +30,7 @@ export const loginAdmin = async (req, res, next) => {
             "admin_rahasia",
             {
               expiresIn: "15m",
-            }
+            },
           );
           const refreshToken = jwt.sign(
             {
@@ -37,7 +38,7 @@ export const loginAdmin = async (req, res, next) => {
               idAdmin: data._id,
             },
             "admin_Kedua_Rahasia",
-            { expiresIn: "168h" }
+            { expiresIn: "168h" },
           );
           data.token = refreshToken;
           data.expiresAt = expiresAt;
@@ -83,7 +84,7 @@ export const refreshToken = async (req, res, next) => {
           "admin_rahasia",
           {
             expiresIn: "15m",
-          }
+          },
         );
         res.status(201).json({
           data,
