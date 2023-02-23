@@ -15,7 +15,7 @@ const orderDataPesanan = async (produkIds) => {
       if (hasils === true)
         throw new HttpError(
           "Produk tidak bisa dihapus atau diedit karena produk ini sedang diorder customer",
-          401,
+          401
         );
     });
     return kocak;
@@ -105,7 +105,7 @@ export const postProduct = async (req, res, next) => {
 
       const uploadImageCloud = await data.uploader.upload(
         gambarCloudUri.content,
-        { folder: "gambar" },
+        { folder: "gambar" }
       );
 
       await postProduct.gambarThumbnail.push({
@@ -125,7 +125,7 @@ export const postProduct = async (req, res, next) => {
 
       const uploadImageCloud = await data.uploader.upload(
         gambarCloudUri.content,
-        { folder: "gambar" },
+        { folder: "gambar" }
       );
 
       await postProduct.gambar.push({
@@ -149,7 +149,7 @@ export const postProduct = async (req, res, next) => {
 
       const uploadImageCloud = await data.uploader.upload(
         gambarCloudUri.content,
-        { folder: "gambar" },
+        { folder: "gambar" }
       );
 
       await postProduct.gambarDanKeterangan.push({
@@ -204,7 +204,7 @@ export const hapusProduct = async (req, res, next) => {
       const sortirprodukitemOrder = data.keranjangOrder.item.filter(
         (databarang) => {
           return databarang.produkIds.idProduct !== produkIds;
-        },
+        }
       );
 
       data.keranjang.item = sortirprodukitem;
@@ -216,23 +216,23 @@ export const hapusProduct = async (req, res, next) => {
     });
 
     const produksortir = await allproduct.filter(
-      (data) => data.idProduct === produkIds,
+      (data) => data.idProduct === produkIds
     );
     if (produksortir.length === 0) throw new HttpError("produk tidak ada", 401);
 
     const deleteCloudGambar = produksFinds[0];
 
     deleteCloudGambar.gambar.map((datas) =>
-      data.uploader.destroy(datas.publick_id),
+      data.uploader.destroy(datas.publick_id)
     );
 
     deleteCloudGambar.gambarThumbnail.map((datas) =>
-      data.uploader.destroy(datas.publick_id),
+      data.uploader.destroy(datas.publick_id)
     );
 
     deleteCloudGambar.gambarDanKeterangan.length > 0
       ? deleteCloudGambar.gambarDanKeterangan.map((datas) =>
-          data.uploader.destroy(datas.publick_id),
+          data.uploader.destroy(datas.publick_id)
         )
       : "";
 
@@ -269,7 +269,7 @@ export const editProductData = async (req, res, next) => {
       throw new HttpError("Belum memasukan gambar yg Harus dimasukan", 401);
 
     await dataEdit.gambarThumbnail.map((datsss) =>
-      data.uploader.destroy(datsss.publick_id),
+      data.uploader.destroy(datsss.publick_id)
     );
 
     dataEdit.gambarThumbnail = await [];
@@ -279,7 +279,7 @@ export const editProductData = async (req, res, next) => {
 
       const uploadImageCloud = await data.uploader.upload(
         gambarCloudUri.content,
-        { folder: "gambar" },
+        { folder: "gambar" }
       );
 
       await dataEdit.gambarThumbnail.push({
@@ -296,7 +296,7 @@ export const editProductData = async (req, res, next) => {
 
     if (req.files.gambarDanKeterangan) {
       await dataEdit.gambarDanKeterangan.map((datsss) =>
-        data.uploader.destroy(datsss.publick_id),
+        data.uploader.destroy(datsss.publick_id)
       );
       dataEdit.gambarDanKeterangan = await [];
       await req.files?.gambarDanKeterangan?.map(async (datas) => {
@@ -306,7 +306,7 @@ export const editProductData = async (req, res, next) => {
 
         const uploadImageCloud = await data.uploader.upload(
           gambarCloudUri.content,
-          { folder: "gambar" },
+          { folder: "gambar" }
         );
 
         await dataEdit.gambarDanKeterangan.push({
@@ -319,7 +319,7 @@ export const editProductData = async (req, res, next) => {
 
     if (req.files.gambar) {
       await dataEdit.gambar.map((datass) =>
-        data.uploader.destroy(datass.publick_id),
+        data.uploader.destroy(datass.publick_id)
       );
 
       dataEdit.gambar = await [];
@@ -328,7 +328,7 @@ export const editProductData = async (req, res, next) => {
 
         const uploadImageCloudedit = await data.uploader.upload(
           gambarCloudUriEdit.content,
-          { folder: "gambar" },
+          { folder: "gambar" }
         );
 
         await dataEdit?.gambar?.push({
