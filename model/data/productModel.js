@@ -74,7 +74,6 @@ const ProdcutSchema = new Schema({
 });
 
 ProdcutSchema.methods.ukurankemBatJas = function (data) {
-  console.log(data);
   if (this.ukuran.kemBatJas.length > 0) this.ukuran.kemBatJas.shift();
   this.ukuran.kemBatJas.push({
     ukuranS: data.ukuranS === "undefined" ? "" : data?.ukuranS?.trim(),
@@ -87,6 +86,7 @@ ProdcutSchema.methods.ukurankemBatJas = function (data) {
 // ProdcutSchema.methods.reviewProduct;
 
 ProdcutSchema.methods.celana = function (data) {
+  if (this.ukuran.celana.length > 0) this.ukuran.celana.shift();
   this.ukuran.celana.push({
     ukuran28: data.ukuran28 === "undefined" ? "" : data.ukuran28.trim(),
     ukuran29: data.ukuran29 === "undefined" ? "" : data.ukuran29.trim(),

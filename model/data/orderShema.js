@@ -28,6 +28,13 @@ const orderSchema = new Schema({
     ref: "Users",
     required: true,
   },
+
+  resiPengiriman: { type: String, default: null },
+
+  gambarResi: {
+    publick_id: { type: String, default: null },
+    url: { type: String, default: null },
+  },
 });
 
 orderSchema.plugin(mongooseUniqueValidator);

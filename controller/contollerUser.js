@@ -56,12 +56,12 @@ export const getUsers = async (req, res, next) => {
 export const postUsers = async (req, res, next) => {
   try {
     const { namaUser, email, password } = req.body;
+    console.log(namaUser, email, password);
     const error = validationResult(req);
+    console.log(req.file);
 
     if (!error.isEmpty()) throw new HttpError(error.array()[0].msg, 401);
-
     const gambarCloudUri = getDataUri(req.file);
-
     const uploadImageCloud = await data.uploader.upload(
       gambarCloudUri.content,
       { folder: "gambar" }

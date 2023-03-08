@@ -83,6 +83,9 @@ export const postOrder = async (req, res, next) => {
     );
     const dataProductOder = await populatedata.keranjangOrder.item.map(
       (data) => {
+        console.log({ ...data.produkIds._doc }, `kocak`, {
+          ...data.produkIds,
+        });
         return {
           ukuran: data.ukuran,
           noteProduk: data.noteProduk,
@@ -133,6 +136,36 @@ export const detailTransaksi = async (req, res, next) => {
     if (orderid.length === 0) throw new HttpError("Tidak ada Data", 401);
     await res.status(201).json({
       orderid,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const inputResi = async (req, res, next) => {
+  try {
+    const pid = req.params.pid;
+    const { resi } = req.body;
+    console.log(resi);
+    const dataIdOrder = await orderShema.findById(pid);
+    if (!req.file || !resi) throw new HttpError("Belum memasukan data", 401);
+    const gambarResicloud = getDataUri(req.file);
+
+    const uploadImageCloud = await data.uploader.upload(
+      gambarResicloud.content,
+      { folder: "gambar" }
+    );
+
+    dataIdOrder.resiPengiriman = resi;
+    dataIdOrder.gambarResi = {
+      publick_id: uploadImageCloud.public_id,
+      url: uploadImageCloud.secure_url,
+    };
+
+    dataIdOrder.save();
+
+    await res.status(201).json({
+      dataIdOrder,
     });
   } catch (err) {
     next(err);

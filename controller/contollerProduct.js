@@ -344,7 +344,7 @@ export const editProductData = async (req, res, next) => {
     dataEdit.deskripsi = await deskripsi;
     dataEdit.harga = await harga;
 
-    await dataEdit.ukurankemBatJas(req.body);
+    await dataUkuranFungsi(jenisPakaian, dataEdit, req);
 
     await session.commitTransaction();
     await res.status(201).json({

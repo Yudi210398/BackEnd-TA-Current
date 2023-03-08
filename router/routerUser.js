@@ -50,7 +50,7 @@ routerUsers.patch("/minQyt", jsonVerify, minQtyCart);
 routerUsers.patch(
   "/limitpembayaran",
   jsonVerify,
-  patchKeranjangOrderLimitPembayaran,
+  patchKeranjangOrderLimitPembayaran
 );
 routerUsers.post("/keranjangorder", jsonVerify, postKeranjangOrder);
 
@@ -66,7 +66,7 @@ routerUsers.patch(
     body("gender").notEmpty().trim().withMessage("Tidak Boleh kosong"),
   ],
   jsonVerify,
-  editProfileUser,
+  editProfileUser
 );
 routerUsers.post(
   "/addAlamat",
@@ -105,7 +105,7 @@ routerUsers.post(
       .withMessage("Tolong Masukan Nomor Handphone dengan benar"),
   ],
   jsonVerify,
-  addAlamat,
+  addAlamat
 );
 routerUsers.post("/addCart", jsonVerify, addCart);
 routerUsers.post(
@@ -135,7 +135,7 @@ routerUsers.post(
       return true;
     }),
   ],
-  postUsers,
+  postUsers
 );
 
 routerUsers.post("/login", authLogin(usersShema), loginUser);
