@@ -145,10 +145,11 @@ export const detailTransaksi = async (req, res, next) => {
 export const inputResi = async (req, res, next) => {
   try {
     const pid = req.params.pid;
-    const { resi } = req.body;
-    console.log(resi);
+    console.log(pid);
+    const { resiPengiriman } = req.body;
     const dataIdOrder = await orderShema.findById(pid);
-    if (!req.file || !resi) throw new HttpError("Belum memasukan data", 401);
+    if (!req.file || !resiPengiriman)
+      throw new HttpError("Belum memasukan data", 401);
     const gambarResicloud = getDataUri(req.file);
 
     const uploadImageCloud = await data.uploader.upload(
@@ -156,7 +157,7 @@ export const inputResi = async (req, res, next) => {
       { folder: "gambar" }
     );
 
-    dataIdOrder.resiPengiriman = resi;
+    dataIdOrder.resiPengiriman = resiPengiriman;
     dataIdOrder.gambarResi = {
       publick_id: uploadImageCloud.public_id,
       url: uploadImageCloud.secure_url,

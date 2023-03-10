@@ -17,6 +17,7 @@ routerOrders.get("/dataiduser/:idorder", jsonAdminVerify, detailTransaksi);
 routerOrders.post(
   "/orderresi/:pid",
   fileUpload.single("gambarResi"),
+  jsonAdminVerify,
   inputResi
 );
 
